@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Anand Sagar - Pure Veg Restaurant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2d5016;
+            --primary-light: #4a7c23;
+            --accent: #ff6b35;
+            --gold: #d4af37;
+            --cream: #faf8f3;
+            --dark: #1a1a1a;
+            --text: #333;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo::before {
+            content: "🌿";
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(45, 80, 22, 0.85), rgba(0, 0, 0, 0.7)), 
+                        url('https://kimi-web-img.moonshot.cn/img/media.istockphoto.com/ab2961b18d8c89b8b6116e25e4b27220dcf2c34e.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" cx="50" cy="50" r="40"/></svg>');
+            background-size: 200px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-50px) rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stars {
+            color: var(--gold);
+            font-size: 1.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        /* Info Bar */
+        .info-bar {
+            background: var(--cream);
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .info-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .info-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .info-text h4 {
+            color: var(--primary);
+            margin-bottom: 0.2rem;
+        }
+
+        .info-text p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .section-header p {
+            color: #666;
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        .feature::before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .experience-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .experience-badge .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        /* Menu Section */
+        .menu {
+            background: var(--cream);
+        }
+
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .menu-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .menu-card-header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .menu-card-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-card-header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: var(--white);
+            border-radius: 50% 50% 0 0;
+        }
+
+        .menu-items {
+            padding: 2rem 1.5rem 1.5rem;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-name {
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .item-price {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .special-tag {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--dark);
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            margin-left: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background: var(--white);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(45, 80, 22, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay span {
+            color: var(--white);
+            font-size: 2rem;
+        }
+
+        /* Reviews Section */
+        .reviews {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--white);
+        }
+
+        .reviews .section-header h2 {
+            color: var(--white);
+        }
+
+        .reviews .section-header h2::after {
+            background: var(--gold);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .review-date {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .review-stars {
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .review-text {
+            font-style: italic;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--cream);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-details {
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-text h4 {
+            margin-bottom: 0.3rem;
+            color: var(--dark);
+        }
+
+        .contact-text p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .hours-table td {
+            padding: 0.8rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .hours-table td:first-child {
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .map-container {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            height: 100%;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .map-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .map-placeholder {
+            flex: 1;
+            background: linear-gradient(135deg, #e0e0e0 0%, #f0f0f0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+            color: #666;
+            padding: 2rem;
+        }
+
+        .map-placeholder .icon {
+            font-size: 3rem;
+            color: var(--primary);
+        }
+
+        .map-info {
+            padding: 1.5rem;
+            background: var(--white);
+        }
+
+        .map-info h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #aaa;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #333;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Quick Action Buttons */
+        .quick-actions {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 999;
+        }
+
+        .quick-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .quick-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .quick-btn.call {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .quick-btn.whatsapp {
+            background: #25d366;
+            color: var(--white);
+        }
+
+        .quick-btn.directions {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        .quick-btn::before {
+            content: attr(data-label);
+            position: absolute;
+            right: 70px;
+            background: var(--dark);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .quick-btn:hover::before {
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-actions {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .quick-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--cream);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-light);
+        }
+
+        /* Image hover effects */
+        .img-zoom {
+            overflow: hidden;
+        }
+
+        .img-zoom img {
+            transition: transform 0.5s ease;
+        }
+
+        .img-zoom:hover img {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Hotel Anand Sagar</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <span class="badge">🌿 100% Pure Vegetarian</span>
+            <h1>Hotel Anand Sagar</h1>
+            <p>Authentic Indian Cuisine & Chinese Delights in Bhilai</p>
+            <div class="rating">
+                <span class="stars">★★★★☆</span>
+                <span>3.5 (535 reviews)</span>
+                <span>•</span>
+                <span>₹1-200 per person</span>
+            </div>
+            <div class="cta-buttons">
+                <a href="tel:07000705599" class="btn btn-primary">📞 Call Now</a>
+                <a href="#menu" class="btn btn-secondary">View Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Bar -->
+    <div class="info-bar">
+        <div class="info-container">
+            <div class="info-item">
+                <div class="info-icon">📍</div>
+                <div class="info-text">
+                    <h4>Location</h4>
+                    <p>Charoda, Bhilai Marshalling Yard, Chhattisgarh 490025</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">🕐</div>
+                <div class="info-text">
+                    <h4>Open Hours</h4>
+                    <p>Everyday 9:00 AM - 10:00 PM</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">💰</div>
+                <div class="info-text">
+                    <h4>Price Range</h4>
+                    <p>Budget Friendly • ₹1-200 per person</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">🥗</div>
+                <div class="info-text">
+                    <h4>Cuisine</h4>
+                    <p>North Indian, South Indian, Chinese</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Welcome to Hotel Anand Sagar</h3>
+                    <p>Experience the authentic taste of India at Hotel Anand Sagar, your favorite vegetarian destination in Bhilai. We take pride in serving delicious, hygienic, and affordable vegetarian meals that remind you of home.</p>
+                    <p>From our special thalis to Chinese delicacies, every dish is prepared with fresh ingredients and traditional recipes passed down through generations.</p>
+
+                    <div class="features">
+                        <div class="feature">Pure Vegetarian</div>
+                        <div class="feature">Kids Menu Available</div>
+                        <div class="feature">All You Can Eat</div>
+                        <div class="feature">Vegan Options</div>
+                        <div class="feature">Home Delivery</div>
+                        <div class="feature">AC Dining</div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.restaurantfurniture.net/b0f45e6d49fd77af601c5281bcf552f175d2032f.jpg" alt="Hotel Anand Sagar Interior">
+                    <div class="experience-badge">
+                        <span class="number">15+</span>
+                        <span>Years of<br>Excellence</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Menu</h2>
+                <p>Explore our wide range of delicious vegetarian dishes from Indian classics to Chinese favorites</p>
+            </div>
+
+            <div class="menu-grid">
+                <!-- Thali -->
+                <div class="menu-card">
+                    <img src="https://kimi-web-img.moonshot.cn/img/assets.dmagstatic.com/b2e52bd23d292e78e61b3c21c60d6389b3a9a277.jpg" alt="Special Thali" class="menu-card-image">
+                    <div class="menu-card-header">
+                        <h3>🍽️ Special Thali</h3>
+                        <p>Complete meal</p>
+                    </div>
+                    <div class="menu-items">
+                        <div class="menu-item">
+                            <span class="item-name">Plate Meals <span class="special-tag">POPULAR</span></span>
+                            <span class="item-price">₹80</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="item-name">Anand Sagar Special Thali <span class="special-tag">BEST</span></span>
+                            <span class="item-price">₹150</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="item-name">Mini Thali</span>
+                            <span class="item-price">₹60</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Course -->
+                <div class="menu-card">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.indianhealthyrecipes.com/77b5d709c566723736d0416ce9df453da0c0f75f.webp" alt="Paneer Butter Masala" class="menu-card-image">
+                    <div class="menu-card-header">
+                        <h3>🍛 Main Course</h3>
+                        <p>Rich and flavorful</p>
+                    </div>
+                    <div class="menu-items">
+                        <div class="menu-item">
+                            <span class="item-name">Paneer Butter Masala</span>
+                            <span class="item-price">₹180</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="item-name">Dal Makhani</span>
+                            <span class="item-price">₹120</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="item-name">Mix Veg</span>
+                            <span class="item-price">₹140</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chinese -->
+                <div class="menu-card">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.cookwithmanali.com/0ebeca9d3389ec1d9fa87b11277ff71b761060a4.jpg" alt="Paneer Chilli" class="menu-card-image">
+                    <div class="menu-card-header">
+                        <h3>🥡 Chinese</h3>
+                        <p>Indo-Chinese fusion</p>
+                    </div>
+                    <div class="menu-items">
+                        <div class="menu-item">
+                            <span class="item-name">Paneer Chilli <span class="special-tag">HOT</span></span>
+                            <span class="item-price">₹160</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="item-name">Veg Manchurian</span>
+                            <span class="item-price">₹140</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="item-name">Hakka Noodles</span>
+                            <span class="item-price">₹100</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- South Indian -->
+                <div class="menu-card">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.indianhealthyrecipes.com/e46ee984f4f6cef7e338254d596aa0d2362b340b.jpg" alt="Masala Dosa" class="menu-card-image">
+                    <div class="menu-card-header">
+                        <h3>🍚 South Indian</h3>
+                        <p>Authentic flavors</p>
+                    </div>
+                    <div class="menu-items">
+                        <div class="menu-item">
+                            <span class="item-name">Masala Dosa</span>
+                            <span class="item-price">₹80</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="item-name">Idli Sambhar</span>
+                            <span class="item-price">₹60</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="item-name">Vada Sambhar</span>
+                            <span class="item-price">₹70</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tandoori -->
+                <div class="menu-card">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.cookwithmanali.com/e8d02b5501840700d2045a622bcf03434eee19ed.jpg" alt="Tandoori Roti" class="menu-card-image">
+                    <div class="menu-card-header">
+                        <h3>🔥 Tandoori</h3>
+                        <p>Fresh from clay oven</p>
+                    </div>
+                    <div class="menu-items">
+                        <div class="menu-item">
+                            <span class="item-name">Paneer Tikka</span>
+                            <span class="item-price">₹180</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="item-name">Tandoori Roti</span>
+                            <span class="item-price">₹20</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="item-name">Butter Naan</span>
+                            <span class="item-price">₹40</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rice & Biryani -->
+                <div class="menu-card">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.indianhealthyrecipes.com/27cdeeb871a0ca5b72d80fdd4e63d3afbbb7fcf5.jpg" alt="Veg Biryani" class="menu-card-image">
+                    <div class="menu-card-header">
+                        <h3>🍚 Rice & Biryani</h3>
+                        <p>Fragrant and aromatic</p>
+                    </div>
+                    <div class="menu-items">
+                        <div class="menu-item">
+                            <span class="item-name">Veg Biryani</span>
+                            <span class="item-price">₹120</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="item-name">Jeera Rice</span>
+                            <span class="item-price">₹80</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="item-name">Veg Pulao</span>
+                            <span class="item-price">₹100</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Snacks -->
+                <div class="menu-card">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.yummytummyaarthi.com/5178d3f6372d106e502fd8461dc4c572598a037f.jpeg" alt="Veg Manchurian Dry" class="menu-card-image">
+                    <div class="menu-card-header">
+                        <h3>🍟 Snacks</h3>
+                        <p>Perfect starters</p>
+                    </div>
+                    <div class="menu-items">
+                        <div class="menu-item">
+                            <span class="item-name">Veg Sandwich</span>
+                            <span class="item-price">₹60</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="item-name">Aloo Tikka</span>
+                            <span class="item-price">₹80</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="item-name">Papad Dry</span>
+                            <span class="item-price">₹40</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Beverages -->
+                <div class="menu-card">
+                    <img src="https://kimi-web-img.moonshot.cn/img/nutritiontofit.com/7d6daf5d816792f048bffa4d7654596aa5458d7f.jpg" alt="Fresh Mocktails" class="menu-card-image">
+                    <div class="menu-card-header">
+                        <h3>🥤 Beverages</h3>
+                        <p>Refreshing drinks</p>
+                    </div>
+                    <div class="menu-items">
+                        <div class="menu-item">
+                            <span class="item-name">Fresh Juice</span>
+                            <span class="item-price">₹60</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="item-name">Milkshakes</span>
+                            <span class="item-price">₹80</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="item-name">Mocktails</span>
+                            <span class="item-price">₹100</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2>Photo Gallery</h2>
+                <p>Glimpses of our delicious food and ambiance</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.cookwithmanali.com/0ebeca9d3389ec1d9fa87b11277ff71b761060a4.jpg" alt="Paneer Chilli">
+                    <div class="gallery-overlay"><span>🔍 Paneer Chilli</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://kimi-web-img.moonshot.cn/img/assets.dmagstatic.com/b2e52bd23d292e78e61b3c21c60d6389b3a9a277.jpg" alt="Special Thali">
+                    <div class="gallery-overlay"><span>🔍 Special Thali</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.indianhealthyrecipes.com/e46ee984f4f6cef7e338254d596aa0d2362b340b.jpg" alt="Masala Dosa">
+                    <div class="gallery-overlay"><span>🔍 Masala Dosa</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.indianhealthyrecipes.com/77b5d709c566723736d0416ce9df453da0c0f75f.webp" alt="Paneer Butter Masala">
+                    <div class="gallery-overlay"><span>🔍 Paneer Butter Masala</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.indianhealthyrecipes.com/27cdeeb871a0ca5b72d80fdd4e63d3afbbb7fcf5.jpg" alt="Veg Biryani">
+                    <div class="gallery-overlay"><span>🔍 Veg Biryani</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.cookwithmanali.com/e8d02b5501840700d2045a622bcf03434eee19ed.jpg" alt="Tandoori Roti">
+                    <div class="gallery-overlay"><span>🔍 Tandoori Roti</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://kimi-web-img.moonshot.cn/img/img.taste.com.au/87817275aa9f2199acd0fbf6616ad59410fbf658.jpg" alt="Dal Makhani">
+                    <div class="gallery-overlay"><span>🔍 Dal Makhani</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.yummytummyaarthi.com/5178d3f6372d106e502fd8461dc4c572598a037f.jpeg" alt="Veg Manchurian">
+                    <div class="gallery-overlay"><span>🔍 Veg Manchurian</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Customers Say</h2>
+                <p style="color: rgba(255,255,255,0.8);">535+ happy customers and counting</p>
+            </div>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="reviewer-name">Rahul Sharma</span>
+                        <span class="review-date">2 weeks ago</span>
+                    </div>
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Best vegetarian food in Bhilai! The Anand Sagar Special Thali is amazing value for money. Highly recommended for families."</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="reviewer-name">Priya Patel</span>
+                        <span class="review-date">1 month ago</span>
+                    </div>
+                    <div class="review-stars">★★★★☆</div>
+                    <p class="review-text">"Great taste and hygiene. The paneer dishes are delicious. Service is quick and staff is courteous. Will visit again!"</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="reviewer-name">Amit Kumar</span>
+                        <span class="review-date">2 months ago</span>
+                    </div>
+                    <div class="review-stars">★★★★☆</div>
+                    <p class="review-text">"Affordable and tasty food. Perfect for daily meals. The South Indian breakfast options are authentic and fresh."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Visit Us</h2>
+                <p>We'd love to serve you! Find us at:</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-text">
+                                <h4>Address</h4>
+                                <p>6FJ5+P66, Charoda, Bhilai Marshalling Yard,<br>Bhilai, Charoda, Chhattisgarh 490025</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-text">
+                                <h4>Phone</h4>
+                                <p>070007 05599</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">🕐</div>
+                            <div class="contact-text">
+                                <h4>Opening Hours</h4>
+                                <table class="hours-table">
+                                    <tr><td>Monday</td><td>9:00 AM - 10:00 PM</td></tr>
+                                    <tr><td>Tuesday</td><td>9:00 AM - 10:00 PM</td></tr>
+                                    <tr><td>Wednesday</td><td>9:00 AM - 10:00 PM</td></tr>
+                                    <tr><td>Thursday</td><td>9:00 AM - 10:00 PM</td></tr>
+                                    <tr><td>Friday</td><td>9:00 AM - 10:00 PM</td></tr>
+                                    <tr><td>Saturday</td><td>9:00 AM - 10:00 PM</td></tr>
+                                    <tr><td>Sunday</td><td>9:00 AM - 10:00 PM</td></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-container">
+                    <img src="https://kimi-web-img.moonshot.cn/img/c8.alamy.com/c1eab726699db4b75f286de7b64052301d057990.jpg" alt="Restaurant Location" class="map-image">
+                    <div class="map-info">
+                        <h4>Get Directions</h4>
+                        <p style="color: #666; font-size: 0.9rem;">Located near Bhilai Marshalling Yard, Charoda. Easily accessible by road. Look for our green signage!</p>
+                        <a href="https://maps.google.com/?q=21.1936,81.3509" target="_blank" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Open in Google Maps</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Hotel Anand Sagar</h4>
+                    <p>Serving delicious vegetarian food since 2009. Your trusted family restaurant in Bhilai.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Instagram">📷</a>
+                        <a href="#" title="WhatsApp">💬</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <p><a href="#menu">Our Menu</a></p>
+                    <p><a href="#about">About Us</a></p>
+                    <p><a href="#gallery">Gallery</a></p>
+                    <p><a href="#contact">Contact</a></p>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <p>Dine-in</p>
+                    <p>Takeaway</p>
+                    <p>Home Delivery</p>
+                    <p>Catering</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>📞 070007 05599</p>
+                    <p>📍 Charoda, Bhilai</p>
+                    <p>🕐 Open 9 AM - 10 PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Hotel Anand Sagar. All rights reserved. | Pure Vegetarian Restaurant</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Quick Action Buttons -->
+    <div class="quick-actions">
+        <a href="tel:07000705599" class="quick-btn call" data-label="Call Now">📞</a>
+        <a href="https://wa.me/917000705599" class="quick-btn whatsapp" data-label="WhatsApp">💬</a>
+        <a href="https://maps.google.com/?q=21.1936,81.3509" class="quick-btn directions" data-label="Directions">🧭</a>
+    </div>
+</body>
+</html>
